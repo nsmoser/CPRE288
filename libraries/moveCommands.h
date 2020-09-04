@@ -22,9 +22,13 @@
 #ifndef MOVECOMMANDS_H_
 #define MOVECOMMANDS_H_
 
-void moveForward(oi_t *sensor, int cm);
+void moveForward(oi_t *sensor, int cm);             //forward movement definition
 
-void turnClockwise(oi_t *sensor, int degrees);
+void moveBackward(oi_t *sensor, int cm);            //backward movement definition
+
+void turnCW(oi_t *sensor, int degrees);             //clockwise turn definition
+
+void turnCCW(oi_t *sensor, int degrees);            //counter-clockwise turn definition
 
 
 
