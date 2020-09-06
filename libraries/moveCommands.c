@@ -21,6 +21,24 @@ void moveForward(oi_t *sensor, int cm){            //forward movement function
     while(distance<(cm*10)){                       //while measured distance is less than
                                                    //distance argument
         oi_update(sensor);                         //update sensor data struct
+        if(sensor->bumpLeft){                      //if the left side is bumped
+            oi_setWheels(0,0);                     //stop moving
+            moveBackward(sensor,15);               //back up 15 cm
+            turnCW(sensor,90);                     //turn right 90 degrees
+            moveForward(sensor,25);                //move forward laterally 25 cm
+            turnCCW(sensor,90);                    //turn left 90 degrees
+            oi_setWheels(200,200);                 //start moving forward again
+            cm+=15;                                //add 15cm to the distance argument
+        }                                          //since it had to backtrack 15cm
+        if(sensor->bumpRight){                     //if the right side is bumped
+            oi_setWheels(0,0);                     //stop moving
+            moveBackward(sensor,15);               //back up 15 cm
+            turnCCW(sensor,90);                    //turn left 90 degrees
+            moveForward(sensor,25);                //move forward laterally 25 cm
+            turnCW(sensor,90);                     //turn right 90 degrees
+            oi_setWheels(200,200);                 //start moving forward again
+            cm+=15;                                //add 15cm to the distance argument
+        }                                          //since it had to backtrack 15cm
         distance+=sensor->distance;                //add change in distance to
     }                                              //measured distance
     oi_setWheels(0,0);                             //turn off wheels
